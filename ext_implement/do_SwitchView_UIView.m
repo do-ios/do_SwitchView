@@ -161,6 +161,7 @@
 {
     NSLog(@"fireEvent");
     doInvokeResult* _invokeResult = [[doInvokeResult alloc]init:_model.UniqueKey];
+    [_invokeResult SetResultBoolean:isOn];
     [_model.EventCenter FireEvent:@"changed":_invokeResult];
 }
 
