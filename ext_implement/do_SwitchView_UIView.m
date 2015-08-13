@@ -113,11 +113,7 @@
 }
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
-    [super setBackgroundColor:backgroundColor];
-    if(CGColorGetAlpha(backgroundColor.CGColor) <= 0)
-        _changLayer.myContentColor = [self superview].backgroundColor;
-    else
-        _changLayer.myContentColor = backgroundColor;
+    _changLayer.myContentColor = backgroundColor;
 }
 #pragma mark - private methed
 - (void)reloadMoveLayer
