@@ -13,7 +13,8 @@
 @required
 //属性方法
 - (void)change_checked:(NSString *)newValue;
-
+- (void)change_shape:(NSString *)newValue;
+- (void)change_colors:(NSString *)newValue;
 //同步或异步方法
 
 @end

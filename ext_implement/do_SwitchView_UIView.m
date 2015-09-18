@@ -13,13 +13,16 @@
 #import "doScriptEngineHelper.h"
 #import "doIScriptEngine.h"
 
+#define onColor @"00FF00"
+#define offColor @"888888"
+#define sliderColor @"FFFFFF"
+#define defaultShape @"circle"
 @interface myLayer : CALayer
-
 @property(nonatomic, strong)UIColor *myShadowColor;
 @property(nonatomic, strong)UIColor *myContentColor;
 @property(nonatomic, assign)BOOL isOn;
 @property(nonatomic, assign)CGFloat board;
-
++ (void)setShapeValue:(NSString *)newValue;
 @end
 
 
@@ -36,7 +39,7 @@
     //是否是开启状态
     BOOL isOn;
     //边框颜色
-    UIColor *_221Color;
+//    UIColor *_221Color;
     //开始，按下点坐标
     CGPoint beginPoint;
     //是否长时间按下。长时间按下pan和tap手势无效。需要还原组件
@@ -50,24 +53,25 @@
 - (void) LoadView: (doUIModule *) _doUIModule
 {
     _model = (typeof(_model)) _doUIModule;
-    
+    self.defaultColors = YES;
     isOn = NO;
     isLongTouch = YES;
-    self.backgroundColor = [UIColor clearColor];
-    _221Color = [UIColor colorWithRed:221*1.0/255 green:221*1.0/255 blue:221*1.0/255 alpha:1];
-    
+//    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [self colorWithHexString:offColor];
+
     _colorLayer = [[myLayer alloc] init];
-    _colorLayer.myContentColor = _221Color;
-    _colorLayer.myShadowColor = _221Color;
+    _colorLayer.myContentColor = [self colorWithHexString:offColor];
+    _colorLayer.myShadowColor = [self colorWithHexString:offColor];
     [self.layer addSublayer:_colorLayer];
     
     _changLayer = [[myLayer alloc] init];
-    _changLayer.myShadowColor = [UIColor clearColor];
+    _changLayer.myContentColor = [self colorWithHexString:offColor];
+    _changLayer.myShadowColor = [self colorWithHexString:offColor];
     [self.layer addSublayer:_changLayer];
     
     _moveLayer = [[myLayer alloc] init];
-    _moveLayer.myShadowColor = _221Color;
-    _moveLayer.myContentColor = [UIColor whiteColor];
+    _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
+    _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
     [self.layer addSublayer:_moveLayer];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(selfViewPan:)];
@@ -131,8 +135,11 @@
             _changLayer.transform = CATransform3DMakeScale(0, 0, 1);
             [self setAllLayerDisplay];
         } completion:^(BOOL finished) {
-            _colorLayer.myContentColor = [UIColor greenColor];
-            _colorLayer.myShadowColor = [UIColor greenColor];
+            if (self.defaultColors)
+            {
+                _colorLayer.myContentColor = [self colorWithHexString:onColor];
+                _colorLayer.myShadowColor = [self colorWithHexString:onColor];
+            }
             [self setAllLayerDisplay];
             NSLog(@"还原 终点");
         }];
@@ -144,8 +151,11 @@
             _changLayer.transform = CATransform3DMakeScale(1, 1, 1);
             [self setAllLayerDisplay];
         } completion:^(BOOL finished) {
-            _colorLayer.myContentColor = _221Color;
-            _colorLayer.myShadowColor = _221Color;
+            if (self.defaultColors)
+            {
+                _colorLayer.myContentColor = [self colorWithHexString:offColor];
+                _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+            }
             [self setAllLayerDisplay];
             NSLog(@"还原 原点");
         }];
@@ -194,8 +204,11 @@
                 _moveLayer.frame = CGRectMake(W-(H-_board)-_board/2, _board/2, H-_board, H-_board);
                 _changLayer.transform = CATransform3DMakeScale(0, 0, 1);
             } completion:^(BOOL finished) {
-                _colorLayer.myContentColor = [UIColor greenColor];
-                _colorLayer.myShadowColor = [UIColor greenColor];
+                if (self.defaultColors)
+                {
+                    _colorLayer.myContentColor = [self colorWithHexString:onColor];
+                    _colorLayer.myShadowColor = [self colorWithHexString:onColor];
+                }
                 [self setAllLayerDisplay];
             }];
         }
@@ -204,8 +217,11 @@
             [UIView animateWithDuration:1.25 animations:^{
                 _moveLayer.frame = CGRectMake(_board/2, _board/2, (H-_board)*5/4, H-_board);
             } completion:^(BOOL finished) {
-                _colorLayer.myContentColor = _221Color;
-                _colorLayer.myShadowColor = _221Color;
+                if (self.defaultColors)
+                {
+                    _colorLayer.myContentColor = [self colorWithHexString:offColor];
+                    _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+                }
                 [self setAllLayerDisplay];
                 beginPoint = newPoint;
                 isOn = !isOn;
@@ -226,8 +242,11 @@
                 _moveLayer.frame = CGRectMake(_board/2, _board/2, H-_board, H-_board);
                 _changLayer.transform = CATransform3DMakeScale(1, 1, 1);
             } completion:^(BOOL finished) {
-                _colorLayer.myContentColor = _221Color;
-                _colorLayer.myShadowColor = _221Color;
+                if (self.defaultColors)
+                {
+                    _colorLayer.myContentColor = [self colorWithHexString:offColor];
+                    _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+                }
                 [self setAllLayerDisplay];
             }];
         }
@@ -236,8 +255,11 @@
             [UIView animateWithDuration:1.25 animations:^{
                 _moveLayer.frame = CGRectMake(W-(H-_board)*5/4, _board/2, (H-_board)*5/4, H-_board);
             } completion:^(BOOL finished) {
-                _colorLayer.myContentColor = [UIColor greenColor];
-                _colorLayer.myShadowColor = [UIColor greenColor];
+                if (self.defaultColors)
+                {
+                    _colorLayer.myContentColor = [self colorWithHexString:onColor];
+                    _colorLayer.myShadowColor = [self colorWithHexString:onColor];
+                }
                 [self setAllLayerDisplay];
                 beginPoint = newPoint;
                 isOn = !isOn;
@@ -329,6 +351,103 @@
     [self reloadMoveLayer];
 }
 
+- (void)change_shape:(NSString *)newValue
+{
+    [myLayer setShapeValue:newValue];
+}
+
+- (void)change_colors:(NSString *)newValue
+{
+    NSArray *colorsArray;
+    if (newValue != nil && [newValue length] > 0)
+    {
+        self.defaultColors = NO;
+        colorsArray = [newValue componentsSeparatedByString:@","];
+        if (colorsArray.count == 3)
+        {
+            _colorLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
+            _colorLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
+            _changLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
+            _changLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
+            _moveLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:2]];
+            _moveLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:2]];
+        }
+        else if(colorsArray.count == 2)
+        {
+            _colorLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
+            _colorLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
+            _changLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
+            _changLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
+            _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
+            _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
+        }
+        else
+        {
+            _colorLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
+            _colorLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
+            _changLayer.myContentColor = [self colorWithHexString:offColor];
+            _changLayer.myShadowColor = [self colorWithHexString:offColor];
+            _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
+            _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
+        }
+        
+    }
+    else
+    {
+        _colorLayer.myContentColor = [self colorWithHexString:onColor];
+        _colorLayer.myShadowColor = [self colorWithHexString:onColor];
+        _changLayer.myContentColor = [self colorWithHexString:offColor];
+        _changLayer.myShadowColor = [self colorWithHexString:offColor];
+        _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
+        _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
+
+    }
+//    [self setBackgroundColor:_moveLayer.myShadowColor];
+    [self reloadMoveLayer];
+}
+
+- (UIColor *) colorWithHexString: (NSString *)colorString
+{
+    NSString *cString = [[colorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) {
+        return [UIColor clearColor];
+    }
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"])
+        cString = [cString substringFromIndex:2];
+    if ([cString hasPrefix:@"#"])
+        cString = [cString substringFromIndex:1];
+    if ([cString length] != 6)
+        return [UIColor clearColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    
+    //r
+    NSString *rString = [cString substringWithRange:range];
+    
+    //g
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    //b
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
+}
+
 #pragma mark - doIUIModuleView协议方法（必须）<大部分情况不需修改>
 - (BOOL) OnPropertiesChanging: (NSMutableDictionary *) _changedValues
 {
@@ -363,19 +482,48 @@
 
 //自定义layer，用于显示。
 @implementation myLayer
+NSString *_shape;
++ (void)setShapeValue:(NSString *)newValue
+{
+    if (newValue != nil && newValue.length > 0)
+    {
+        _shape = newValue;
+    }
+    else
+    {
+        _shape = defaultShape;
+    }
+}
 
 - (void)drawInContext:(CGContextRef)context
 {
     //设置曲线
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:self.bounds.size.height/2.0];
+    UIBezierPath *bezierPath;
+    if ([_shape isEqualToString:@"rect"])
+    {
+        bezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:0];
+        
+    }
+    else
+    {
+        bezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:self.bounds.size.height/2.0];
+    }
     CGContextAddPath(context, bezierPath.CGPath);
     CGContextClip(context);
     //内容上色
     CGContextSetFillColorWithColor(context, self.myShadowColor.CGColor);
     CGContextFillRect(context, CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height));
     
+    UIBezierPath *bezierPath1;
+    if ([_shape isEqualToString:@"rect"])
+    {
+        bezierPath1 = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.board, self.board, self.bounds.size.width-2*self.board, self.bounds.size.height-2*self.board) cornerRadius:0];
+    }
     
-    UIBezierPath *bezierPath1 = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.board, self.board, self.bounds.size.width-2*self.board, self.bounds.size.height-2*self.board) cornerRadius:self.bounds.size.height/2.0];
+    else
+    {
+         bezierPath1 = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.board, self.board, self.bounds.size.width-2*self.board, self.bounds.size.height-2*self.board) cornerRadius:self.bounds.size.height/2.0];
+    }
     CGContextAddPath(context, bezierPath1.CGPath);
     CGContextClip(context);
     //内容上色

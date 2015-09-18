@@ -20,7 +20,7 @@
 @property(nonatomic, strong) UIColor *onTintColor;
 @property(nonatomic, strong) UIColor *tintColor;
 @property(nonatomic, strong) UIColor *thumbTintColor;
-
+@property (nonatomic, assign)BOOL defaultColors;
 @property(nonatomic, strong) UIImage *onImage;
 @property(nonatomic, strong) UIImage *offImage;
 

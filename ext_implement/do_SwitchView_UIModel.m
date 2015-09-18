@@ -16,7 +16,9 @@
 {
     [super OnInit];    
     //属性声明
-	[self RegistProperty:[[doProperty alloc]init:@"checked" :Bool :@"false" :NO]];
+	[self RegistProperty:[[doProperty alloc]init:@"checke                                                                                                                                                                                                                                                               d" :Bool :@"false" :NO]];
+    [self RegistProperty:[[doProperty alloc]init:@"shape" :String :@"circle":NO]];
+    [self RegistProperty:[[doProperty alloc]init:@"colors" :String :@"00FF00,888888,FFFFFF":NO]];
 }
-
 @end
+
