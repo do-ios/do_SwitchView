@@ -18,6 +18,7 @@
 #define sliderColor @"FFFFFF"
 #define defaultShape @"circle"
 #define defaultColorsString @"00FF00,888888,FFFFFF"
+
 @interface myLayer : CALayer
 @property(nonatomic, strong)UIColor *myShadowColor;
 @property(nonatomic, strong)UIColor *myContentColor;
@@ -60,8 +61,8 @@
 //    self.backgroundColor = [UIColor clearColor];
     self.backgroundColor = [self colorWithHexString:offColor];
     
-    [self change_shape:[_model GetProperty:@"shape"].DefaultValue];
-    [self change_colors:[_model GetProperty:@"colors"].DefaultValue];
+//    [self change_shape:[_model GetProperty:@"shape"].DefaultValue];
+//    [self change_colors:[_model GetProperty:@"colors"].DefaultValue];
     _colorLayer = [[myLayer alloc] init];
     if (self.defaultColors == YES)
     {
