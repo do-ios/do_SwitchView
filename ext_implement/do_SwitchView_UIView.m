@@ -17,6 +17,7 @@
 #define offColor @"888888"
 #define sliderColor @"FFFFFF"
 #define defaultShape @"circle"
+#define defaultColorsString @"00FF00,888888,FFFFFF"
 @interface myLayer : CALayer
 @property(nonatomic, strong)UIColor *myShadowColor;
 @property(nonatomic, strong)UIColor *myContentColor;
@@ -58,20 +59,31 @@
     isLongTouch = YES;
 //    self.backgroundColor = [UIColor clearColor];
     self.backgroundColor = [self colorWithHexString:offColor];
-
+    
+    [self change_shape:[_model GetProperty:@"shape"].DefaultValue];
+    [self change_colors:[_model GetProperty:@"colors"].DefaultValue];
     _colorLayer = [[myLayer alloc] init];
-    _colorLayer.myContentColor = [self colorWithHexString:offColor];
-    _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+    if (self.defaultColors == YES)
+    {
+        _colorLayer.myContentColor = [self colorWithHexString:offColor];
+        _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+    }
     [self.layer addSublayer:_colorLayer];
     
     _changLayer = [[myLayer alloc] init];
-    _changLayer.myContentColor = [self colorWithHexString:offColor];
-    _changLayer.myShadowColor = [self colorWithHexString:offColor];
+    if (self.defaultColors == YES)
+    {
+        _changLayer.myContentColor = [self colorWithHexString:offColor];
+        _changLayer.myShadowColor = [self colorWithHexString:offColor];
+    }
     [self.layer addSublayer:_changLayer];
     
     _moveLayer = [[myLayer alloc] init];
-    _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
-    _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
+    if (self.defaultColors == YES)
+    {
+        _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
+        _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
+    }
     [self.layer addSublayer:_moveLayer];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(selfViewPan:)];
@@ -359,7 +371,7 @@
 - (void)change_colors:(NSString *)newValue
 {
     NSArray *colorsArray;
-    if (newValue != nil && [newValue length] > 0)
+    if (newValue != nil && [newValue length] > 0 && ![newValue isEqualToString:defaultColorsString])
     {
         self.defaultColors = NO;
         colorsArray = [newValue componentsSeparatedByString:@","];
@@ -394,6 +406,7 @@
     }
     else
     {
+        self.defaultColors = YES;
         _colorLayer.myContentColor = [self colorWithHexString:onColor];
         _colorLayer.myShadowColor = [self colorWithHexString:onColor];
         _changLayer.myContentColor = [self colorWithHexString:offColor];
