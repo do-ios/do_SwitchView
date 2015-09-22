@@ -131,6 +131,7 @@
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
     _changLayer.myContentColor = backgroundColor;
+    _changLayer.myShadowColor = backgroundColor;
 }
 #pragma mark - private methed
 - (void)reloadMoveLayer
