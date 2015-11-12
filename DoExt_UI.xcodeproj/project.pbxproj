@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BA680141BF42B0F00BBC0F8 /* do_SwitchView_UIModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4A21F6A1AD7A11500551D2A /* do_SwitchView_UIModel.h */; };
+		3BA680151BF42B0F00BBC0F8 /* do_SwitchView_UIView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4A21F6C1AD7A11500551D2A /* do_SwitchView_UIView.h */; };
 		A4A21F6E1AD7A11500551D2A /* do_SwitchView_UIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A21F6B1AD7A11500551D2A /* do_SwitchView_UIModel.m */; };
 		A4A21F6F1AD7A11500551D2A /* do_SwitchView_UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A21F6D1AD7A11500551D2A /* do_SwitchView_UIView.m */; };
 /* End PBXBuildFile section */
@@ -18,6 +20,8 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				3BA680141BF42B0F00BBC0F8 /* do_SwitchView_UIModel.h in CopyFiles */,
+				3BA680151BF42B0F00BBC0F8 /* do_SwitchView_UIView.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +88,7 @@
 		A4A21F6B1AD7A11500551D2A /* do_SwitchView_UIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = do_SwitchView_UIModel.m; sourceTree = "<group>"; };
 		A4A21F6C1AD7A11500551D2A /* do_SwitchView_UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = do_SwitchView_UIView.h; sourceTree = "<group>"; };
 		A4A21F6D1AD7A11500551D2A /* do_SwitchView_UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = do_SwitchView_UIView.m; sourceTree = "<group>"; };
-		A4D118B01A70D50F002F1A18 /* libDoExt_UI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDoExt_UI.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4D118B01A70D50F002F1A18 /* libswitchView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libswitchView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +197,7 @@
 		A4D118B11A70D50F002F1A18 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A4D118B01A70D50F002F1A18 /* libDoExt_UI.a */,
+				A4D118B01A70D50F002F1A18 /* libswitchView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,7 +219,7 @@
 			);
 			name = DoExt_UI;
 			productName = DoExt_UI;
-			productReference = A4D118B01A70D50F002F1A18 /* libDoExt_UI.a */;
+			productReference = A4D118B01A70D50F002F1A18 /* libswitchView.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -348,7 +352,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = ../doLib/doCore;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = switchView;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -364,7 +368,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = ../doLib/doCore;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = switchView;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
