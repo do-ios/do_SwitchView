@@ -58,11 +58,8 @@
     self.defaultColors = YES;
     isOn = NO;
     isLongTouch = YES;
-//    self.backgroundColor = [UIColor clearColor];
-    self.backgroundColor = [self colorWithHexString:offColor];
-    
-//    [self change_shape:[_model GetProperty:@"shape"].DefaultValue];
-//    [self change_colors:[_model GetProperty:@"colors"].DefaultValue];
+    self.backgroundColor = [UIColor clearColor];
+
     _colorLayer = [[myLayer alloc] init];
     if (self.defaultColors == YES)
     {
@@ -127,11 +124,6 @@
     [super touchesEnded:touches withEvent:event];
     if(isLongTouch)
         [self reloadMoveLayer];
-}
-- (void)setBackgroundColor:(UIColor *)backgroundColor
-{
-    _changLayer.myContentColor = backgroundColor;
-    _changLayer.myShadowColor = backgroundColor;
 }
 #pragma mark - private methed
 - (void)reloadMoveLayer
