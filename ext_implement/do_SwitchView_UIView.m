@@ -171,15 +171,21 @@
                 _colorLayer.myShadowColor = [self colorWithHexString:offColor];
             }
             [self setAllLayerDisplay];
-            NSLog(@"还原 原点");
         }];
     }
     isMoved = NO;
+    //设置属性改变
+    if (isOn) {
+        [_model SetPropertyValue:@"checked" :@"true"];
+    }
+    else
+    {
+        [_model SetPropertyValue:@"checked" :@"false"];
+    }
 }
 
 - (void)valueChanged
 {
-    NSLog(@"fireEvent");
     doInvokeResult* _invokeResult = [[doInvokeResult alloc]init:_model.UniqueKey];
     [_invokeResult SetResultBoolean:!isOn];
     [_model.EventCenter FireEvent:@"changed":_invokeResult];
