@@ -63,24 +63,24 @@
     _colorLayer = [[myLayer alloc] init];
     if (self.defaultColors == YES)
     {
-        _colorLayer.myContentColor = [self colorWithHexString:offColor];
-        _colorLayer.myShadowColor = [self colorWithHexString:offColor];
-    }
+        _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
+        
+        _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];    }
     [self.layer addSublayer:_colorLayer];
     
     _changLayer = [[myLayer alloc] init];
     if (self.defaultColors == YES)
     {
-        _changLayer.myContentColor = [self colorWithHexString:offColor];
-        _changLayer.myShadowColor = [self colorWithHexString:offColor];
+        _changLayer.myContentColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
+        _changLayer.myShadowColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
     }
     [self.layer addSublayer:_changLayer];
     
     _moveLayer = [[myLayer alloc] init];
     if (self.defaultColors == YES)
     {
-        _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
-        _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
+        _moveLayer.myShadowColor = [doUIModuleHelper GetColorFromString:sliderColor :[UIColor clearColor]];
+        _moveLayer.myContentColor = [doUIModuleHelper GetColorFromString:sliderColor :[UIColor clearColor]];
     }
     [self.layer addSublayer:_moveLayer];
     
@@ -148,8 +148,9 @@
         } completion:^(BOOL finished) {
             if (self.defaultColors)
             {
-                _colorLayer.myContentColor = [self colorWithHexString:onColor];
-                _colorLayer.myShadowColor = [self colorWithHexString:onColor];
+                _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:onColor :[UIColor clearColor]];
+
+                _colorLayer.myShadowColor =  [doUIModuleHelper GetColorFromString:onColor :[UIColor clearColor]];
             }
             [self setAllLayerDisplay];
             NSLog(@"还原 终点");
@@ -164,8 +165,9 @@
         } completion:^(BOOL finished) {
             if (self.defaultColors)
             {
-                _colorLayer.myContentColor = [self colorWithHexString:offColor];
-                _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+                _colorLayer.myContentColor =  [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
+                _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
+
             }
             [self setAllLayerDisplay];
         }];
@@ -223,8 +225,8 @@
             } completion:^(BOOL finished) {
                 if (self.defaultColors)
                 {
-                    _colorLayer.myContentColor = [self colorWithHexString:onColor];
-                    _colorLayer.myShadowColor = [self colorWithHexString:onColor];
+                    _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:onColor :[UIColor clearColor]];
+                    _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:onColor :[UIColor clearColor]];
                 }
                 [self setAllLayerDisplay];
             }];
@@ -236,8 +238,9 @@
             } completion:^(BOOL finished) {
                 if (self.defaultColors)
                 {
-                    _colorLayer.myContentColor = [self colorWithHexString:offColor];
-                    _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+                    _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
+
+                    _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
                 }
                 [self setAllLayerDisplay];
                 beginPoint = newPoint;
@@ -261,8 +264,9 @@
             } completion:^(BOOL finished) {
                 if (self.defaultColors)
                 {
-                    _colorLayer.myContentColor = [self colorWithHexString:offColor];
-                    _colorLayer.myShadowColor = [self colorWithHexString:offColor];
+                    _colorLayer.myContentColor =[doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
+
+                    _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:offColor :[UIColor clearColor]];
                 }
                 [self setAllLayerDisplay];
             }];
@@ -274,8 +278,10 @@
             } completion:^(BOOL finished) {
                 if (self.defaultColors)
                 {
-                    _colorLayer.myContentColor = [self colorWithHexString:onColor];
-                    _colorLayer.myShadowColor = [self colorWithHexString:onColor];
+                    _colorLayer.myContentColor =[doUIModuleHelper GetColorFromString:onColor :[UIColor clearColor]];
+
+                    _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:onColor :[UIColor clearColor]];
+
                 }
                 [self setAllLayerDisplay];
                 beginPoint = newPoint;
@@ -382,89 +388,47 @@
         colorsArray = [newValue componentsSeparatedByString:@","];
         if (colorsArray.count == 3)
         {
-            _colorLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
-            _colorLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
-            _changLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
-            _changLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
-            _moveLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:2]];
-            _moveLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:2]];
+            _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _changLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _changLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _moveLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _moveLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
         }
         else if(colorsArray.count == 2)
         {
-            _colorLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
-            _colorLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
-            _changLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
-            _changLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:1]];
-            _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
-            _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
+            _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _changLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _changLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _moveLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]];
+            _moveLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]];
+
         }
         else
         {
-            _colorLayer.myContentColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
-            _colorLayer.myShadowColor = [self colorWithHexString:[colorsArray objectAtIndex:0]];
-            _changLayer.myContentColor = [self colorWithHexString:offColor];
-            _changLayer.myShadowColor = [self colorWithHexString:offColor];
-            _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
-            _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
+            _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+            _changLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:136/255.0 green:136/255.0 blue:136/255.0 alpha:1]];
+            _changLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:136/255.0 green:136/255.0 blue:136/255.0 alpha:1]];
+            _moveLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]];
+            _moveLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]];
         }
         
     }
     else
     {
         self.defaultColors = YES;
-        _colorLayer.myContentColor = [self colorWithHexString:onColor];
-        _colorLayer.myShadowColor = [self colorWithHexString:onColor];
-        _changLayer.myContentColor = [self colorWithHexString:offColor];
-        _changLayer.myShadowColor = [self colorWithHexString:offColor];
-        _moveLayer.myContentColor = [self colorWithHexString:sliderColor];
-        _moveLayer.myShadowColor = [self colorWithHexString:sliderColor];
-
-    }
-//    [self setBackgroundColor:_moveLayer.myShadowColor];
+        _colorLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+        _colorLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:0] :[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1]];
+        _changLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:136/255.0 green:136/255.0 blue:136/255.0 alpha:1]];
+        _changLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:1] :[UIColor colorWithRed:136/255.0 green:136/255.0 blue:136/255.0 alpha:1]];
+        _moveLayer.myContentColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]];
+        _moveLayer.myShadowColor = [doUIModuleHelper GetColorFromString:[colorsArray objectAtIndex:2] :[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1]];    }
     [self reloadMoveLayer];
 }
 
-- (UIColor *) colorWithHexString: (NSString *)colorString
-{
-    NSString *cString = [[colorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-    
-    // String should be 6 or 8 characters
-    if ([cString length] < 6) {
-        return [UIColor clearColor];
-    }
-    
-    // strip 0X if it appears
-    if ([cString hasPrefix:@"0X"])
-        cString = [cString substringFromIndex:2];
-    if ([cString hasPrefix:@"#"])
-        cString = [cString substringFromIndex:1];
-    if ([cString length] != 6)
-        return [UIColor clearColor];
-    
-    // Separate into r, g, b substrings
-    NSRange range;
-    range.location = 0;
-    range.length = 2;
-    
-    //r
-    NSString *rString = [cString substringWithRange:range];
-    
-    //g
-    range.location = 2;
-    NSString *gString = [cString substringWithRange:range];
-    
-    //b
-    range.location = 4;
-    NSString *bString = [cString substringWithRange:range];
-    
-    // Scan values
-    unsigned int r, g, b;
-    [[NSScanner scannerWithString:rString] scanHexInt:&r];
-    [[NSScanner scannerWithString:gString] scanHexInt:&g];
-    [[NSScanner scannerWithString:bString] scanHexInt:&b];
-    
-    return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
-}
+
 
 #pragma mark - doIUIModuleView协议方法（必须）<大部分情况不需修改>
 - (BOOL) OnPropertiesChanging: (NSMutableDictionary *) _changedValues
